@@ -73,12 +73,37 @@ $(document).ready(function() {
 			}
 			// console.log("Oil score is: " + oilScore);
 
-			if (carInput === 0 || carInput === "undefined") {
-				carScore = 0;
+			if (carInputP === 0 || carInputP === "undefined") {
+				carScoreP = 0;
 			} else {
-				carScore = (carInput/0.621371) * 0.79;
+				carScoreP = (carInputP/0.621371) * 0.79;
 			}
-			// console.log("Car score is: " + carScore);
+			// console.log("Petrol Car score is: " + carScoreP);
+				if (carInputD === 0 || carInputD === "undefined") {
+				carScoreD = 0;
+			} else {
+				carScoreD = (carInputD/0.640273) * 0.79;
+			}
+			// console.log("Diesel Car score is: " + carScoreD);
+				if (carInputC === 0 || carInputC === "undefined") {
+				carScoreC = 0;
+			} else {
+				carScoreC = (carInputC/0.680015) * 0.79;
+			}
+			// console.log("CNG Car score is: " + carScoreC);
+			if (bikeInput === 0 || bikeInput === "undefined") {
+				bikeScore = 0;
+			} else {
+				bikeScore = (bikeInput/0.11955) * 0.79;
+			}
+			// console.log("bike score is: " + bikeScore);
+
+			if (trainInput === 0 || trainInput === "undefined") {
+				trainScore = 0;
+			} else {
+				trainScore = (trainInput/0.101283) * 0.79;
+			}
+			// console.log("train score is: " + trainScore);
 		
 			if (flights4LessInput === 0 || flights4LessInput === "undefined") {
 				flights4LessScore = 0;
