@@ -130,9 +130,27 @@ $(document).ready(function() {
 			// console.log(totalScore);
 
 			document.getElementById("score").innerHTML = formattedScore;
+function drawChart(energyScore,travelScore,wasteScore) {
+	        var data = google.visualization.arrayToDataTable([
+          ['Scores', 'Core Activities'],
+          ['Energy Score',     energyScore],
+          ['Travel Score',      travelScore],
+          ['Recycle Score',  wasteScore]
+        ]);
+
+        var options = {
+          title: 'Division of Scores',
+          pieHole: 0.3,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+        chart.draw(data, options);
+      }
+			document.getElementById("score").innerHTML = formattedScore;
 
 			// display results
 			$("#results").show();
+			drawChart(energyScore,travelScore,wasteScore);
 
 			// refresh page when recalculate button clicked
 			$("#recalculate-btn").on("click", function() {
