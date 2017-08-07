@@ -22,7 +22,11 @@ $(document).ready(function() {
 			var electricInput = document.getElementById("electric").value;
 			var gasInput = document.getElementById("gas").value;
 			var oilInput = document.getElementById("oil").value;
-			var carInput = document.getElementById("car").value;
+			var carInputP = document.getElementById("carP").value;
+			var carInputD = document.getElementById("carD").value;
+			var carInputC = document.getElementById("carC").value;
+			var bikeInput = document.getElementById("bike").value;
+			var trainInput = document.getElementById("train").value;
 			var flights4LessInput = document.getElementById("flights-4-less").value;
 			var flights4MoreInput = document.getElementById("flights-4-more").value;
 			
@@ -30,7 +34,11 @@ $(document).ready(function() {
 			var electricScore = "";
 			var gasScore = "";
 			var oilScore = "";
-			var carScore = "";
+			var carScoreP = "";
+			var carScoreD = "";
+			var carScoreC = "";
+			var bikeScore = "";
+			var trainScore = "";
 			var flights4LessScore = "";
 			var flights4MoreScore = "";
 			var newspaperScore = "";
@@ -73,13 +81,38 @@ $(document).ready(function() {
 			}
 			// console.log("Oil score is: " + oilScore);
 
-			if (carInput === 0 || carInput === "undefined") {
-				carScore = 0;
+			if (carInputP === 0 || carInputP === "undefined") {
+				carScoreP = 0;
 			} else {
-				carScore = (carInput/0.621371) * 0.79;
+				carScoreP = (carInputP/0.621371) * 0.79;
 			}
-			// console.log("Car score is: " + carScore);
-		
+			// console.log("Petrol Car score is: " + carScoreP);
+				if (carInputD === 0 || carInputD === "undefined") {
+				carScoreD = 0;
+			} else {
+				carScoreD = (carInputD/0.640273) * 0.79;
+			}
+			// console.log("Diesel Car score is: " + carScoreD);
+				if (carInputC === 0 || carInputC === "undefined") {
+				carScoreC = 0;
+			} else {
+				carScoreC = (carInputC/0.680015) * 0.79;
+			}
+			// console.log("CNG Car score is: " + carScoreC);
+			if (bikeInput === 0 || bikeInput === "undefined") {
+				bikeScore = 0;
+			} else {
+				bikeScore = (bikeInput/0.11955) * 0.79;
+			}
+			// console.log("bike score is: " + bikeScore);
+
+			if (trainInput === 0 || trainInput === "undefined") {
+				trainScore = 0;
+			} else {
+				trainScore = (trainInput/0.101283) * 0.79;
+			}
+			// console.log("train score is: " + trainScore);
+
 			if (flights4LessInput === 0 || flights4LessInput === "undefined") {
 				flights4LessScore = 0;
 			} else {
@@ -96,19 +129,36 @@ $(document).ready(function() {
 
 			// calculate scores for each category
 			var energyScore = electricScore + gasScore + oilScore;
-			var travelScore = carScore	+ flights4LessScore + flights4MoreScore;
+			var travelScore = bikeScore +trainScore + carScoreC	+carScoreD	+ carScoreP + flights4LessScore + flights4MoreScore;
 			var wasteScore = newspaperScore + alumTinScore;
 
 			// calculate total score and round to nearest whole integer
-			totalScore = Math.round(energyScore + travelScore + wasteScore);
+			totalScore = ((energyScore + travelScore + wasteScore))/1000;
 			var formattedScore = totalScore.toLocaleString("en");
 			// console.log(totalScore);
+//graph display
+//graph display
+function drawChart(energyScore,travelScore,wasteScore) {
+	        var data = google.visualization.arrayToDataTable([
+          ['Scores', 'Core Activities'],
+          ['Energy Score',     energyScore],
+          ['Travel Score',      travelScore],
+          ['Recycle Score',  wasteScore]
+        ]);
 
+        var options = {
+          title: 'Division of Scores',
+          pieHole: 0.3,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+        chart.draw(data, options);
+      }
 			document.getElementById("score").innerHTML = formattedScore;
 
 			// display results
 			$("#results").show();
-
+			drawChart(energyScore,travelScore,wasteScore);
 			// refresh page when recalculate button clicked
 			$("#recalculate-btn").on("click", function() {
 				location.reload();

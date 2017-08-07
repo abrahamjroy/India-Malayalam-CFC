@@ -55,11 +55,40 @@
 						<br/>
 						<h3 class="form-section-label" id="travel-label"><i class="fa fa-globe" aria-hidden="true"></i> യാത്ര</h3>
 						<div class="form-group">
-							<label for="car">നിങ്ങളുടെ കാറിൽ കയറുന്ന വാർഷിക ദൂരം</label>
+							<label for="car">
+നിങ്ങൾ ഒരു പെട്രോൾ വാഹനം അഭിമുഖീകരിക്കുമ്പോഴും നിങ്ങളുടെ ടാക്സിയിൽ വാർഷിക ദൂരം (ടാക്സിക്കകൾക്കും ഓട്ടോ റിക്ഷകൾക്കും മൂല്യങ്ങൾ ഉൾപ്പെടുന്നു)</label>
 							<div class="input-group-addon">Km</div>
-							<input class="form-control" id="car" type="number" min="0" step="1">
-							<span class="help-block">ബാധകമല്ലെങ്കിൽ നൽകുക. ശൂന്യമായി വിട്ടാൽ, 0 ലേക്ക് സ്ഥിരസ്ഥിതിയായി വരും.</span>
+							<input class="form-control" id="carP" type="number" min="0" step="1">
+							<span class="help-block">Enter 0 if not applicable. If left blank, will default to 0.</span>
 						</div>
+<div class="form-group">
+							<label for="car">
+നിങ്ങൾ ഒരു ഡീസൽ വാഹനം അഭിമുഖീകരിക്കുമ്പോൾ കാറിലുണ്ടായിരുന്ന വാർഷിക ദൂരം (ടാക്സിക്കബുകൾക്കും ഓട്ടോ റിക്ഷകൾക്കുമുള്ള മൂല്യങ്ങൾ ഉൾപ്പെടുന്നു)</label>
+							<div class="input-group-addon">Km</div>
+							<input class="form-control" id="carD" type="number" min="0" step="1">
+							<span class="help-block">Enter 0 if not applicable. If left blank, will default to 0.</span>
+						</div>
+<div class="form-group">
+							<label for="car">
+നിങ്ങൾ സിഎൻജി വാഹനം അഭിമുഖീകരിക്കുമ്പോൾ കാറിലുണ്ടാക്കുന്ന വാർഷിക ദൂരം (ടാക്സിക്കബാസ്, ഓട്ടോ റിക്ഷകൾക്കുള്ള മൂല്യങ്ങൾ എന്നിവ ഉൾപ്പെടുന്നു)</label>
+							<div class="input-group-addon">Km</div>
+							<input class="form-control" id="carC" type="number" min="0" step="1">
+							<span class="help-block">Enter 0 if not applicable. If left blank, will default to 0.</span>
+						</div>
+<div class="form-group">
+							<label for="car">
+നിങ്ങളുടെ ബൈക്കിൽ സഞ്ചരിക്കുന്ന വാർഷിക ദൂരം</label>
+							<div class="input-group-addon">Km</div>
+							<input class="form-control" id="bike" type="number" min="0" step="1">
+							<span class="help-block">Enter 0 if not applicable. If left blank, will default to 0.</span>
+						</div>
+<div class="form-group">
+							<label for="car">ഒരു ട്രെയിനിലെ വാർഷിക ദൂരം</label>
+							<div class="input-group-addon">Km</div>
+							<input class="form-control" id="train" type="number" min="0" step="1">
+							<span class="help-block">Enter 0 if not applicable. If left blank, will default to 0.</span>
+						</div>
+
 						<div class="form-group">
 							<label for="flights-4-less">കഴിഞ്ഞ വർഷം എടുത്ത 4 ഫ്ലൈറ്റുകളുടെ എണ്ണം (4 മണിക്കൂർ അല്ലെങ്കിൽ അതിൽ കുറവ്)</label>
 							<input class="form-control" id="flights-4-less" type="number" min="0" step="1">
@@ -73,7 +102,7 @@
 						<br/>
 						<h3 class="form-section-label" id="waste-label"><i class="fa fa-recycle" aria-hidden="true"></i> വേസ്റ്റ്</h3>
 						<div class="form-group">
-							<label>നിങ്ങൾ പത്രവാർത്ത പുനരുൽപ്പാദിപ്പിക്കുന്നുണ്ടോ?</label>
+							<label>നിങ്ങൾ വാർത്ത പത്രം പുനരുൽപ്പാദിപ്പിക്കുന്നുണ്ടോ?</label>
 							<div class="alert alert-danger" role="alert" id="newspaper-alert"><strong>Oops!</strong> You need to make a selection.</div>
 							<div class="radio">
 								<label>
@@ -111,6 +140,7 @@
 
 				<div id="results" class="text-center">
 					<h1 id="score"></h1>
+					<div id="donutchart" class="center" style="width: 800px; height: 500px;"></div>
 					<br/>
 					<p class="lead">വർഷം തോറും നിങ്ങൾ കാർബൺ ഡൈ ഓക്സൈഡിന്റെ യൂണിറ്റുകളിൽ ഹരിതഗൃഹ വാതകങ്ങളെ പ്രതിനിധീകരിക്കുന്നു</p>
 					<br/>
@@ -143,6 +173,12 @@
 	</div>
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+ 
+</script>
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	<script src="js/script.js" type="text/javascript"></script>
